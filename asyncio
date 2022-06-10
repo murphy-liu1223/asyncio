@@ -1,0 +1,29 @@
+import asyncio
+import numpy as np
+import time
+
+
+
+def time_now():
+    time.sleep(2)
+    print(time.strftime('%Y-%m-%d %H:%M:%S'))
+    
+def main():
+    for i in np.arange(5):
+        time_now()
+
+main()
+
+
+async def time_now():
+    await asyncio.sleep(2)
+    print(time.strftime('%Y-%m-%d %H:%M:%S'))
+    
+async def main():
+    tasks = []
+    for i in np.arange(5):
+        task = asyncio.create_task(time_now())
+        tasks.append(task)
+    await asyncio.gather(*tasks)
+
+await main()
